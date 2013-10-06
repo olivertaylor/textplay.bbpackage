@@ -73,56 +73,73 @@
     <dict>
 
         <key>Identifier and Keyword Character Class</key>
-            <string><![CDATA[!$%&*+.,;/()<;=>?^~0-9A-Z_a-z‘’“” ÄÅÁÀÂÃÇÉÈÊËÑÖØÓÒÔÕÜÚÙÛÍÌÎÏÆŒäåáàâãçéèêëñöøóòôõüúùûíìîïæœÿß@:-]]></string>
+            <string><![CDATA[!$%&*+.,;/()<;=>?^~0-9A-Z_a-z'"‘’“” ÄÅÁÀÂÃÇÉÈÊËÑÖØÓÒÔÕÜÚÙÛÍÌÎÏÆŒäåáàâãçéèêëñöøóòôõüúùûíìîïæœÿß@:-]]></string>
      
 
         <key>Comment Pattern</key>
         <string>
             (?x-i:
-            (?s:/\*.*?\*/)
-            |
-            (?s:\[\[.*?\]\])
-            |
-            ^//.*$
-            |
-            ^\#.*$
-            |
+            
+            (?# boneyard comments)
+            (?s:/\*.*?\*/) |
+            
+            (?# notes)
+            (?s:\[\[.*?\]\]) |
+            
+            (?# screenbundle comments)
+            ^//.*$ |
+            
+            (?# Section markers)
+            ^\#.*$ |
+            
+            (?# Synopsis Markers)
             ^\=.*$            
             )
         </string>
 
-		<key>String Pattern</key>
-		<string>
-			<![CDATA[
-			(?x-i:
-				(?<!\\)\*+_*(?<!\\)\**[^<>\n\r]+?(?<!\\|\ )\**_*(?<!\\|\ )\*+
-			|	_+(?<!\\)\**_*[^<>]+?_*(?<!\\|\ )\**_+
-			|	^[\ \t]?\>.*?\<$
-			|   ^(?<=^\r)(\t|\ )*?[A-Z ]+?[A-Z0-9-\'\"\’\”\‘\“\$\#\ \(\)\,\.\^\/\\\*\&\@\?\!\=\+\%]*?(\t|\ )*(?=\r\s*?\r)$
-			)
-			]]>
-		</string>
+        <key>String Pattern</key>
+        <string>
+            <![CDATA[
+            (?x-i:
+            
+                (?# emphasis markers)
+                (?<!\\)\*+_*(?<!\\)\**[^<>\n\r]+?(?<!\\|\ )\**_*(?<!\\|\ )\*+
+            |   _+(?<!\\)\**_*[^<>]+?_*(?<!\\|\ )\**_+
 
-		<key>Function Pattern</key>
-		<string>
-			<![CDATA[
-			(?x-i:
-				^\s*\r+?
-				(?P<function>^(\.*)
-					(?P<function_name>(?(?<=(\.))[A-Za-z0-9-\ \'\"\’\”\‘\“]+$
-					|	(\#+\ )
-						.*$)
-					)
-				(?s:.*?\r*?(?=\r*?
-					(	^\#+\ 
-					|	^\.
-					|	\z)
-					)
-				)
-				)
-			)
-			]]>
-		</string>
+                (?# Centered Text)
+            |   ^[\ \t]?\>.*?\<$
+
+                (?# Any call-caps line - used strictly for coloring)
+            |   ^(?<=^\r)(\t|\ )*?[A-Z ]+?[A-Z0-9-\'\"\’\”\‘\“\$\#\ \(\)\,\.\^\/\\\*\&\@\?\!\=\+\%]*?(\t|\ )*(?=\r\s*?\r)$
+            )
+            ]]>
+        </string>
+
+        <key>Function Pattern</key>
+        <string>
+            <![CDATA[
+            (?x-i:
+            
+            (?# the beginning of the file, or a set of empty lines)
+            (\A|^[ \t]*\n+)
+
+                (?P<function>
+                        (?# The section heading marker)
+                        (^\#\ )
+
+                    (?P<function_name>
+                        (?# The section heading text)                        
+                        (.*$)
+                    )
+
+                    (?# Everything up to the next section heading, or end of file)
+                    (?s:.+?(?=(\n+\#\ |\z)))
+
+                )
+
+            )
+            ]]>
+        </string>
 
     </dict>
 </dict>
