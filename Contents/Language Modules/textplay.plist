@@ -90,10 +90,10 @@
             ^//.*$ |
             
             (?# Section markers)
-            ^\#.*$ |
+            ^[\ \t]*\#.*$ |
             
             (?# Synopsis Markers)
-            ^\=.*$            
+            ^[\ \t]*\=.*$            
             )
         </string>
 
@@ -121,11 +121,11 @@
             (?x-i:
             
             (?# the beginning of the file, or a set of empty lines)
-            (\A|^[ \t]*\n+)
+            (\A|^[\ \t]*\n+)
 
                 (?P<function>
                         (?# The section heading marker)
-                        (^\#\ )
+                        (^[\ \t]*\#+\ )
 
                     (?P<function_name>
                         (?# The section heading text)                        
@@ -133,7 +133,7 @@
                     )
 
                     (?# Everything up to the next section heading, or end of file)
-                    (?s:.+?(?=(\n+\#\ |\z)))
+                    (?s:.+?(?=(\n+[ \t]*\#+\ |\z)))
 
                 )
 
