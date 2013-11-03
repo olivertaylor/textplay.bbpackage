@@ -21,7 +21,7 @@ txtFile.puts input
 end
 
 # run textplay
-system("#{textplay_path} -p /tmp/textplay_pagecheck.txt /tmp/textplay_pagecheck.pdf;open /tmp/textplay_pagecheck.pdf")
+system("#{textplay_path} -p /tmp/textplay_pagecheck.txt")
 
 # put the input back to STDOUT
 puts input

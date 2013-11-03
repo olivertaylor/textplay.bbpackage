@@ -19,3 +19,7 @@ It includes:
 
 [tp]: http://git.io/textplay
 [fn]: http://fountain.io
+
+## Customization
+
+One of the Text Filters included here lets you preview the selected text as a PDF. To make this actually work you must edit the path to your installation of textplay.
