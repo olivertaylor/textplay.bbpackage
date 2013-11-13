@@ -63,7 +63,7 @@
     </array>
 
     <key>BBLMCommentLineDefault</key>
-    <string>= </string>
+    <string># </string>
     <key>BBLMCommentPrefixDefault</key>
     <string>/*</string>
     <key>BBLMCommentSuffixDefault</key>
@@ -110,35 +110,25 @@
             |   ^[\ \t]?\>.*?\<$
 
                 (?# Any call-caps line - used strictly for coloring)
-            |   ^(?<=^\r)(\t|\ )*?[A-Z ]+?[A-Z0-9-\'\"\’\”\‘\“\$\#\ \(\)\,\.\^\/\\\*\&\@\?\!\=\+\%]*?(\t|\ )*(?=\r\s*?\r)$
+            |   ^(?<=^\r)[^a-z]+(?=\r\s*?\r)$
             )
             ]]>
         </string>
 
         <key>Function Pattern</key>
         <string>
-            <![CDATA[
-            (?x-i:
-            
-            (?# the beginning of the file, or a set of empty lines)
-            (\A|^[\ \t]*\n+)
-
-                (?P<function>
-                        (?# The section heading marker)
-                        (^[\ \t]*\#+\ )
-
-                    (?P<function_name>
-                        (?# The section heading text)                        
-                        (.*$)
-                    )
-
-                    (?# Everything up to the next section heading, or end of file)
-                    (?s:.+?(?=(\n+[ \t]*\#+\ |\z)))
-
-                )
-
-            )
-            ]]>
+            <![CDATA[(?x-i:
+            (?# beginning of file or empty line)
+            (\A|^\s*\n)
+            (?# the section marker)
+            (^\s*\#\ )
+            (?# the section title)
+            (?P<function_name>(.*))
+            (?# followed by anything...)
+            (?s:.+?)
+            (?# ...until the next section marker, or eof)
+            (?=\n\s*\#\ |\z)
+            )]]>
         </string>
 
     </dict>
