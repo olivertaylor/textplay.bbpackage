@@ -110,17 +110,7 @@
             |   ^[\ \t]?\>.*?\<$
 
                 (?# Any call-caps line - used strictly for coloring)
-            |
-                (?# start of the document, or empty line)
-                (?:\A|^[\t\ ]*\n)
-                (?# optional indent)
-                [\ \t]*
-                (?# does NOT start with an escape character)
-                (?![=#]|//|\[{2}|/\*)
-                (?# The actual slugline)
-                ([^a-z]+)\n
-                (?# lookahead for an empty line)
-                (?=[\ \t]*\n)
+            |   (?:\A|^[\t\ ]*\n)^([^#=\n/\[])[^a-z\n]+\n(?=[\ \t]*\n)
             )
             ]]>
         </string>
