@@ -4,8 +4,7 @@
 # Very handy for checking the page-count of a section you're working on.
 
 # You must specify the path to your installation of textplay
-# Yes, even if it is in $PATH
-textplay_path = "~/code/textplay/textplay"
+textplay_path = "/usr/local/bin/textplay"
 
 # ------------------------------
 
