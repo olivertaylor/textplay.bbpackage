@@ -11,8 +11,10 @@
 
     <key>BBLMPreferredFilenameExtension</key>
         <string>fountain</string>
+<!-- 
     <key>BBLMSupportsTextCompletion</key>
         <string>true</string>
+ -->
     <key>BBLMCanSpellCheckCodeRuns</key>
         <true />
     <key>BBLMReferenceSearchURLTemplate</key>
@@ -82,13 +84,10 @@
             
             (?# boneyard comments)
             (?s:/\*.*?\*/) |
-            
+
             (?# notes)
             (?s:\[\[.*?\]\]) |
-            
-            (?# screenbundle comments)
-            ^//.*$ |
-            
+             
             (?# Section markers)
             ^[\ \t]*\#.*$ |
             
